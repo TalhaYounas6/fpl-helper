@@ -1,0 +1,22 @@
+export const SLUG_TO_FPL_NAME = {
+  "arsenal": "Arsenal",
+  "aston_villa": "Aston Villa",
+  "bournemouth": "Bournemouth",
+  "brentford": "Brentford",
+  "brighton": "Brighton",
+  "chelsea": "Chelsea",
+  "crystal_palace": "Crystal Palace",
+  "everton": "Everton",
+  "fulham": "Fulham",
+  "leeds_united": "Leeds",
+  "sunderland": "Sunderland",
+  "liverpool": "Liverpool",
+  "man_city": "Man City",
+  "man_utd": "Man Utd",
+  "newcastle": "Newcastle",
+  "nottm_forest": "Nott'm Forest",
+  "Burnley": "Burnley",
+  "tottenham": "Spurs", 
+  "west_ham": "West Ham",
+  "wolves": "Wolves"
+};

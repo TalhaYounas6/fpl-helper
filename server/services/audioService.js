@@ -11,7 +11,7 @@ if(!fs.existsSync(temp_dir)){
 
 export const downloadAudio = async(videoId)=>{
     const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-    const outputPath = path.join(temp_dir,`${videoUrl}.mp3`);
+    const outputPath = path.join(temp_dir,`${videoId}.mp3`);
 
     console.log("Starting to download audio for: ",videoId);
     try {
@@ -23,7 +23,7 @@ export const downloadAudio = async(videoId)=>{
       ffmpegLocation: ffmpegPath,
     })
         
-    console.log("Audio downlaod complete.For: ",outputPath);
+    console.log("Audio download complete.For: ",outputPath);
     return outputPath;
 
     } catch (error) {
