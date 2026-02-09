@@ -25,7 +25,6 @@ const runTest2 = async()=>{
 
 // runTest2();
 
-// backend/test-full-flow.js
 const runTest3 = async () => {
   const TEST_VIDEO_ID = "ngLocojJYVs"; 
   const TEAM_NAME = "Leeds";

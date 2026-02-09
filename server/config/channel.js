@@ -1,3 +1,23 @@
 export const CHANNELS = {
     "Leeds": { name:"Leeds United", channelId : "UCyQcJHDN4uYfPa1DHzKVSnw"},
+    "Arsenal":           { name: "Arsenal",             channelId: "UC..." },
+  "Aston Villa":       { name: "Aston Villa",         channelId: "UC..." },
+  "Bournemouth":       { name: "AFC Bournemouth",     channelId: "UC..." },
+  "Brentford":         { name: "Brentford FC",        channelId: "UC..." },
+  "Brighton":          { name: "Brighton & Hove Albion",channelId: "UC..." },
+  "Chelsea":           { name: "Chelsea FC",          channelId: "UC..." },
+  "Crystal Palace":    { name: "Crystal Palace",      channelId: "UC..." },
+  "Everton":           { name: "Everton",             channelId: "UC..." },
+  "Fulham":            { name: "Fulham FC",           channelId: "UC..." },
+  "Burnley":           { name: "Burnley",        channelId: "UC..." },
+  "Sunderland":         { name: "Sunderland",      channelId: "UC..." },
+  "Liverpool":         { name: "Liverpool FC",        channelId: "UC..." },
+  "Man City":          { name: "Manchester City",     channelId: "UC..." }, 
+  "Man Utd":           { name: "Manchester United",   channelId: "UC..." }, 
+  "Newcastle":         { name: "Newcastle United",    channelId: "UC..." },
+  "Nott'm Forest":     { name: "Nottingham Forest",   channelId: "UC..." }, 
+  "Southampton":       { name: "Southampton FC",      channelId: "UC..." },
+  "Spurs":             { name: "Tottenham Hotspur",   channelId: "UC..." }, 
+  "West Ham":          { name: "West Ham United",     channelId: "UC..." },
+  "Wolves":            { name: "Wolverhampton",       channelId: "UC..." }
 }
