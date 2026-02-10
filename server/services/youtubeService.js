@@ -47,8 +47,10 @@ export const searchLatestPressConference = async (channelId) => {
         return (
           title.includes("press conference") || 
           title.includes("media briefing") || 
-          title.includes("manager preview")
-        ) && !title.includes("u21") && !title.includes("women") && !title.includes("post match"); 
+          title.includes("manager preview") ||
+          title.includes("embargoed section") ||
+          title.includes("manager's preview")
+        ) && !title.includes("u21") && !title.includes("women") && !title.includes("post match") && !title.includes("reay"); 
       })
       .sort((a, b) => {
         return new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt);

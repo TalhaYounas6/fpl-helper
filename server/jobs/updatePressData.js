@@ -55,14 +55,14 @@ export const runUpdate = async()=>{
     console.log("Starting update job");
 
     const teams = Object.entries(CHANNELS);
-    const [fplName,config] = teams[0];
-    await processTeam(fplName,config);
+    // const [fplName,config] = teams[0];
+    // await processTeam(fplName,config);
 
-    // for([fplName, config] of teams){
-    //     await processTeam(fplName,config);
+    for([fplName, config] of teams){
+        await processTeam(fplName,config);
 
-    //     await new Promise((resolve)=> setTimeout(resolve,5000));     
-    // }
+        await new Promise((resolve)=> setTimeout(resolve,5000));     
+    }
 
     console.log("Data is updated");
     process.exit(0);
