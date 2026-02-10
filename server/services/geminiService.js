@@ -4,43 +4,40 @@ import { getTeamPlayers } from "./fplService.js";
 import { SLUG_TO_FPL_NAME } from "../config/constants.js";
 import { check } from "../utils/playerNameSpellChecker.js";
 
-export const analyzeAudio = async(filepath,teamName)=>{
+export const analyzeAudio = async(transcript,teamName)=>{
 try {
     console.log("Fetching official squad for context...");
     const squadList = await getTeamPlayers(teamName);
     const squadString = squadList.join(", ");
 
-    console.log("Uploading audio to Gemini...");
+    // console.log("Uploading audio to Gemini...");
 
-    const uploadResponse = await fileManager.uploadFile(filepath,{
-        mimeType: "audio/mp3",
-        displayName : `${teamName} Press Conference`,
-    });
+    // const uploadResponse = await fileManager.uploadFile(filepath,{
+    //     mimeType: "audio/mp3",
+    //     displayName : `${teamName} Press Conference`,
+    // });
 
-    console.log("Upload complete. Processing audio...");
+    // console.log("Upload complete. Processing audio...");
 
-    let file = await fileManager.getFile(uploadResponse.file.name);
-    while(file.state === "PROCESSING"){
-        await new Promise((resolve)=>setTimeout(resolve,2000));
-        file = await fileManager.getFile(uploadResponse.file.name);
-    }
+    // let file = await fileManager.getFile(uploadResponse.file.name);
+    // while(file.state === "PROCESSING"){
+    //     await new Promise((resolve)=>setTimeout(resolve,2000));
+    //     file = await fileManager.getFile(uploadResponse.file.name);
+    // }
 
-    if(file.state === "FAILED"){
-        throw new Error("Video processing failed");
-    }
+    // if(file.state === "FAILED"){
+    //     throw new Error("Video processing failed");
+    // }
 
     console.log("Gemini generating analysis");
 
     const result = await model.generateContent([
         {
-            fileData:{
-                mimeType : uploadResponse.file.mimeType,
-                fileUri: uploadResponse.file.uri,
-            }
-        },{
             text: `You are a strict Fantasy Premier League (FPL) data extractor.
         
         CONTEXT:
+        Here is a transcript of a press conference:
+        "${transcript}"
         The manager of ${teamName} is speaking.
         Here is the OFFICIAL list of players in this squad:
         [${squadString}]
@@ -71,7 +68,7 @@ try {
         }
     ]);
 
-    await fileManager.deleteFile(uploadResponse.file.name);
+    // await fileManager.deleteFile(uploadResponse.file.name);
 
     const textResponse = result.response.text();
     const cleanedJson = cleanString(textResponse);

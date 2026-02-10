@@ -3,6 +3,7 @@ import { analyzeAudio } from "../services/geminiService.js";
 import { saveTeamUpdate } from "../services/redisService.js";
 import {searchLatestPressConference } from "../services/youtubeService.js";
 import {CHANNELS} from "../config/channel.js"
+import { textToAudio } from "../services/transcriptionService.js";
 
 
 
@@ -26,9 +27,12 @@ try {
     console.log("Downloading audio");
     filePath = await downloadAudio(video.id);
 
+    //text to audio
+    const transcriptText = textToAudio(filePath);
+
     // Analyzing audio
     console.log("Analysis...");
-    const analysis = await analyzeAudio(filePath,fplName);
+    const analysis = await analyzeAudio(transcriptText,fplName);
 
     // Save to redis
     const redisData = {
