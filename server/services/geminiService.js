@@ -52,6 +52,7 @@ try {
            Make sure you also use the correct player name spelling in direct quotes.
         4. If the manager is vague (e.g., "we will see tomorrow"), mark the status as "Doubtful" and the Flag Color as "yellow".
         5. Do not include or mention players that are out on loan. Ignore loan talk.
+        6. Do not include direct quotes in the summary.
         
         OUTPUT FORMAT (JSON ONLY):
         {

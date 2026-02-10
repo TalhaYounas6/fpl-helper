@@ -2,15 +2,14 @@ import {youtube} from "../config/youtube.js"
 
 
 
-const fetchVideos = async(channelId,query,searchType)=>{
+const fetchVideos = async(channelId,searchType)=>{
     try {
     const params = {
       part: 'snippet',
       channelId: channelId,
-      q: query,
       type: 'video',
       order: 'date', 
-      maxResults: 10, 
+      maxResults: 30, 
       key: process.env.YOUTUBE_DATA_API_KEY,
     };
 
@@ -27,14 +26,14 @@ const fetchVideos = async(channelId,query,searchType)=>{
 };
 
 export const searchLatestPressConference = async (channelId) => {
-  const query = "press conference"; 
+  // const query = "press conference"; 
   
   console.log(`Youtube Searching both Live & Video tabs...`);
 
   try {
     const [liveResults, videoResults] = await Promise.all([
-      fetchVideos(channelId, query, 'live'), 
-      fetchVideos(channelId, query, 'video')  
+      fetchVideos(channelId,'live'), 
+      fetchVideos(channelId, 'video')  
     ]);
 
     const allCandidates = [...liveResults, ...videoResults];
@@ -44,12 +43,20 @@ export const searchLatestPressConference = async (channelId) => {
     const validVideos = allCandidates
       .filter(video => {
         const title = video.snippet.title.toLowerCase();
+
+        if (video.snippet.liveBroadcastContent === 'upcoming') {
+           console.log(`Skipping upcoming stream: ${title}`);
+           return false;
+        }
+
         return (
           title.includes("press conference") || 
           title.includes("media briefing") || 
           title.includes("manager preview") ||
           title.includes("embargoed section") ||
-          title.includes("manager's preview")
+          title.includes("manager's preview") ||
+          title.includes("preview") ||
+          title.includes("scott parker")
         ) && !title.includes("u21") && !title.includes("women") && !title.includes("post match") && !title.includes("reay"); 
       })
       .sort((a, b) => {
