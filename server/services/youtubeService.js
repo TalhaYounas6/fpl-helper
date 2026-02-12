@@ -57,7 +57,7 @@ export const searchLatestPressConference = async (channelId) => {
           title.includes("manager's preview") ||
           title.includes("preview") ||
           title.includes("scott parker")
-        ) && !title.includes("u21") && !title.includes("women") && !title.includes("post match") && !title.includes("reay"); 
+        ) && !title.includes("u21") && !title.includes("women") && !title.includes("post match") && !title.includes("reay") && !title.includes("post") && !title.includes("FA") && !title.includes("carabao")&& !title.includes("cup"); 
       })
       .sort((a, b) => {
         return new Date(b.snippet.publishedAt) - new Date(a.snippet.publishedAt);

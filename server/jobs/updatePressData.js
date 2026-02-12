@@ -4,6 +4,7 @@ import { saveTeamUpdate } from "../services/redisService.js";
 import {searchLatestPressConference } from "../services/youtubeService.js";
 import {CHANNELS} from "../config/channel.js"
 import { textToAudio } from "../services/transcriptionService.js";
+import { getTeamPlayers } from "../services/fplService.js";
 
 
 
@@ -28,7 +29,8 @@ try {
     filePath = await downloadAudio(video.id);
 
     //text to audio
-    const transcriptText = textToAudio(filePath);
+    const rosterList = await getTeamPlayers(fplName);
+    const transcriptText = await textToAudio(filePath,rosterList);
 
     // Analyzing audio
     console.log("Analysis...");
@@ -59,14 +61,16 @@ export const runUpdate = async()=>{
     console.log("Starting update job");
 
     const teams = Object.entries(CHANNELS);
-    // const [fplName,config] = teams;
-    // await processTeam(fplName,config);
+    const [fplName,config] = teams;
+    await processTeam(fplName,config);
 
     for(const [fplName, config] of teams){
         await processTeam(fplName,config);
 
         await new Promise((resolve)=> setTimeout(resolve,5000));     
     }
+
+   
 
     console.log("Data is updated");
     process.exit(0);

@@ -36,15 +36,16 @@ try {
             text: `You are a strict Fantasy Premier League (FPL) data extractor.
         
         CONTEXT:
-        Here is a transcript of a press conference:
+        Here is a transcript of the press conference:
         "${transcript}"
         The manager of ${teamName} is speaking.
         Here is the OFFICIAL list of players in this squad:
         [${squadString}]
 
         INSTRUCTIONS:
-        1. Listen to the entire audio. Do not summarize until the end.
-        2. Extract EVERY injury, illness, or availability update mentioned.
+        1. Extract EVERY injury, illness, or availability update mentioned.
+        2. Map them ONLY to names in the squad list.
+        3. Calculate a "Fraud Score" (0-10) based on how vague the manager's language is (e.g. "touch and go" = High Fraud).
         3. If a player name is mentioned, you MUST match it to the closest name in the official list above. Do not invent spellings. 
            Make sure you also use the correct player name spelling in direct quotes.
         4. If the manager is vague (e.g., "we will see tomorrow"), mark the status as "Doubtful" and the Flag Color as "yellow".
