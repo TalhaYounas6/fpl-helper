@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import router from "./routes/teamRoutes.js";
-
+import "./cron/scheduler.js";
 
 const app = express();
 

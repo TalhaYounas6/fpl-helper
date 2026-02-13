@@ -1,13 +1,13 @@
 import { deleteAudioFile, downloadAudio } from "../services/audioService.js";
-import { analyzeAudio } from "../services/geminiService.js";
-import { saveTeamUpdate } from "../services/redisService.js";
+import { analyzeAudio} from "../services/geminiService.js";
+import { saveTeamUpdate,getRedisTeamData } from "../services/redisService.js";
 import {searchLatestPressConference } from "../services/youtubeService.js";
 import {CHANNELS} from "../config/channel.js"
 import { textToAudio } from "../services/transcriptionService.js";
 import { getTeamPlayers } from "../services/fplService.js";
 
 
-export const processTeam = async(fplName,config)=>{
+export const processTeam = async(fplName,config,forceUpdate=false)=>{
 const {name : displayName, channelId} = config;
 
 console.log(`Working on ${displayName}`);
@@ -16,10 +16,20 @@ let filePath;
 
 try {
     // Searching youtube
-    const video = await searchLatestPressConference(channelId);
+    const video = await searchLatestPressConference(channelId,displayName);
     if(!video){
         console.log("No recent press conference found.");
         return;
+    }
+    if (!forceUpdate) {
+        const currentDbData = await getRedisTeamData(fplName);
+
+        // Check if the IDs match
+        if (currentDbData && currentDbData.video_url && currentDbData.video_url.includes(video.id)) {
+            console.log(`SKIPPING: Video "${video.title}" is already processed.`);
+            console.log(`(Use /refresh endpoint if you want to force a re-run)`);
+            return null; 
+        }
     }
     console.log(`Video found: ${video.title}`);
 

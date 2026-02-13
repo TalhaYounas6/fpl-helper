@@ -39,7 +39,7 @@ export const refreshTeam = async (req, res) => {
     }
 
     console.log(`Manual refresh triggered for ${fplName}`);
-    const newData = await processTeam(fplName, config);
+    const newData = await processTeam(fplName, config,true);
 
     res.status(200).json({ message: "Update successful", data: newData });
   } catch (error) {
