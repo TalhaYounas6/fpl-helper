@@ -1,5 +1,5 @@
 import Redis from "ioredis";
-import "dotenv/config";
+// import "dotenv/config";
 
 const redis = new Redis(process.env.Redis_URL);
 
@@ -19,5 +19,19 @@ export const saveTeamUpdate = async(team,data)=>{
   } catch (error) {
     console.log( `Error in Redis saving update: ${team} `,error);
     return false;
+  }
+}
+
+export const getRedisTeamData = async(fplName)=>{
+  try {
+    const key = `team: ${fplName}: latest`;
+    const teamData = await redis.get(key);
+    if(!teamData){
+      return null;
+    }
+    return JSON.parse(teamData);
+  } catch (error) {
+    console.log("Error in retreiving data: ",error);
+    return null;
   }
 }
