@@ -4,10 +4,11 @@ import { getTeamPlayers } from "./fplService.js";
 import { SLUG_TO_FPL_NAME } from "../config/constants.js";
 import { check } from "../utils/playerNameSpellChecker.js";
 
-export const analyzeAudio = async(transcript,teamName)=>{
+export const analyzeAudio = async(transcript,teamName,rosterList)=>{
 try {
     console.log("Fetching official squad for context...");
-    const squadList = await getTeamPlayers(teamName);
+    // const squadList = await getTeamPlayers(teamName);
+    const squadList = rosterList;
     const squadString = squadList.join(", ");
 
     // console.log("Uploading audio to Gemini...");

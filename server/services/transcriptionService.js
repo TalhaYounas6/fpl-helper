@@ -10,6 +10,7 @@ import {client} from "../config/assemblyAi.js"
 // };
 
 export const textToAudio = async(audioFile,rosterList)=>{
+    console.log("Converting text to audio...");
     const transcript = await client.transcripts.transcribe({
   audio: audioFile,
   // "language_detection": true,

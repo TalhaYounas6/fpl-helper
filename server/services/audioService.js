@@ -18,6 +18,10 @@ export const downloadAudio = async(videoId)=>{
     await ytDlp(videoUrl, {
       extractAudio: true,
       audioFormat: 'mp3',
+      audioQuality: 9, 
+      postprocessorArgs: [
+        'ffmpeg:-b:a 32k' 
+      ],
       output: path.join(temp_dir, '%(id)s.%(ext)s'), 
       noPlaylist: true,
       ffmpegLocation: ffmpegPath,

@@ -43,7 +43,7 @@ try {
 
     // Analyzing audio
     console.log("Analysis...");
-    const analysis = await analyzeAudio(transcriptText,fplName);
+    const analysis = await analyzeAudio(transcriptText,fplName,rosterList);
 
     // Save to redis
     const redisData = {
