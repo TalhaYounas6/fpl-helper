@@ -1,18 +1,8 @@
-# nixpacks.toml
+# /server/nixpacks.toml
 
 [phases.setup]
-# We explicitly install Node, Python, and FFmpeg here
-nixPkgs = ['nodejs', 'python3', 'ffmpeg']
+nixPkgs = ['ffmpeg', 'python3', 'yt-dlp']
 
 [phases.install]
-# We link 'python3' to 'python' so the script finds it
-cmds = [
-    'ln -sf $(which python3) /usr/bin/python',
-    'npm ci'
-]
+cmds = ['npm install']
 
-[phases.build]
-cmds = ['npm run build']
-
-[start]
-cmd = 'node index.js'
