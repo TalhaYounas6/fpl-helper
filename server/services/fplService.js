@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { SLUG_TO_FPL_NAME } from '../config/constants.js';
 
 const FPL_API_URL = "https://fantasy.premierleague.com/api/bootstrap-static/";
 
@@ -10,11 +9,6 @@ export const getTeamPlayers = async (targetName) => {
     
     const data = response.data;
     
-    // if (!targetName) {
-    //   console.error(`No mapping found for slug: ${targetName}`);
-    //   return [];
-    // }
-
     const teamObj = data.teams.find(t => t.name === targetName || t.short_name === targetName || t.name.toLowerCase().includes(targetName.toLowerCase()));
     
     if (!teamObj) {

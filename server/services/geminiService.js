@@ -1,34 +1,12 @@
 import { model } from "../config/gemini.js";
-import { fileManager } from "../config/gemini.js";
-import { getTeamPlayers } from "./fplService.js";
-import { SLUG_TO_FPL_NAME } from "../config/constants.js";
-import { check } from "../utils/playerNameSpellChecker.js";
+
 
 export const analyzeAudio = async(transcript,teamName,rosterList)=>{
 try {
     console.log("Fetching official squad for context...");
-    // const squadList = await getTeamPlayers(teamName);
     const squadList = rosterList;
     const squadString = squadList.join(", ");
 
-    // console.log("Uploading audio to Gemini...");
-
-    // const uploadResponse = await fileManager.uploadFile(filepath,{
-    //     mimeType: "audio/mp3",
-    //     displayName : `${teamName} Press Conference`,
-    // });
-
-    // console.log("Upload complete. Processing audio...");
-
-    // let file = await fileManager.getFile(uploadResponse.file.name);
-    // while(file.state === "PROCESSING"){
-    //     await new Promise((resolve)=>setTimeout(resolve,2000));
-    //     file = await fileManager.getFile(uploadResponse.file.name);
-    // }
-
-    // if(file.state === "FAILED"){
-    //     throw new Error("Video processing failed");
-    // }
 
     console.log("Gemini generating analysis");
 
@@ -52,6 +30,19 @@ try {
         4. If the manager is vague (e.g., "we will see tomorrow"), mark the status as "Doubtful" and the Flag Color as "yellow".
         5. Do not include or mention players that are out on loan. Ignore loan talk.
         6. Do not include direct quotes in the summary.
+
+        Follow these classification rules RIGIDLY for labelling player availability:
+
+1. **OUT**:
+   - Use this if the manager says: "will miss", "not available", "out for X weeks", "won't make it", "too soon".
+   - CRITICAL RULE: If a player is described as "improving", "closer", or "doing well" but is explicitly stated to NOT play this weekend, they are **OUT**. Do not use sentiment to upgrade them.
+
+2. **DOUBT**:
+   - Use this ONLY if there is a realistic chance they might play.
+   - Keywords: "touch and go", "late fitness test", "we'll assess him tomorrow", "50/50", "could be an option".
+
+3. **AVAILABLE**:
+   - Use this if the manager confirms they are fit, training, or in the squad.
         
         OUTPUT FORMAT (JSON ONLY):
         {
@@ -60,8 +51,8 @@ try {
           "injuries": [
             {
               "player": "Exact Name from Official List",
-              "status": "Available" | "Doubtful" | "Out",
               "quote": "Direct quote from manager",
+              "status": "Available" | "Doubtful" | "Out",
               "flag_color": "green" | "yellow" | "red"
             }
           ]
@@ -70,7 +61,6 @@ try {
         }
     ]);
 
-    // await fileManager.deleteFile(uploadResponse.file.name);
 
     const textResponse = result.response.text();
     const cleanedJson = cleanString(textResponse);

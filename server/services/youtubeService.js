@@ -3,7 +3,7 @@ import axios from "axios"
 import {youtube} from "../config/youtube.js"
 
 
-const parser = new Parser();
+// const parser = new Parser();
 
 // const fetchVideos = async(channelId,searchType)=>{
 //     try {
@@ -179,6 +179,7 @@ const fetchTab = async (channelId, tab) => {
     }).filter(Boolean);
 
   } catch (error) {
+    
     return [];
   }
 };
@@ -212,7 +213,7 @@ export const searchLatestPressConference = async (channelId, teamName) => {
       
     const relevanceRegex = /\b(press conference|media briefing|preview|embargoed|pre-match|pre match|scott parker)\b/i;
 
-    const junkRegex = /\b(u21|women|post match|post-match|fa|carabao|cup|highlights|fantasy|goals|reaction)\b/i;
+    const junkRegex = /\b(u21|women|post match|post-match|fa|carabao|cup|highlights|fantasy|goals|reaction|show|special|post)\b/i;
 
     const isRelevant = relevanceRegex.test(title);
     const isJunk = junkRegex.test(title);

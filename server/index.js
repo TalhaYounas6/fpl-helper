@@ -13,8 +13,6 @@ if (process.argv[1] === __filename) {
 
   const startServer = async () => {
     try {
-    
-
       server.listen(port, () => {
         console.log(`App is listening on port ${port}`);
       });
@@ -45,7 +43,7 @@ if (process.argv[1] === __filename) {
       });
 
     } catch (error) {
-      console.error('Unable to connect to the databases:', error);
+      console.error(error);
       process.exit(1);
     }
   };

@@ -16,6 +16,7 @@ export const getTeamStatus = async(req,res)=>{
         }
 
         res.status(200).json({
+            success:true,
             statusCode : 200,
             message: "Data retrieved",
             data : data
@@ -23,6 +24,7 @@ export const getTeamStatus = async(req,res)=>{
     } catch (error) {
         res.status(500).json({
             statusCode : 500,
+            success :false,
             message : error.message
         })
     }

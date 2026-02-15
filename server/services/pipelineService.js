@@ -2,7 +2,6 @@ import { deleteAudioFile, downloadAudio } from "../services/audioService.js";
 import { analyzeAudio} from "../services/geminiService.js";
 import { saveTeamUpdate,getRedisTeamData } from "../services/redisService.js";
 import {searchLatestPressConference } from "../services/youtubeService.js";
-import {CHANNELS} from "../config/channel.js"
 import { textToAudio } from "../services/transcriptionService.js";
 import { getTeamPlayers } from "../services/fplService.js";
 
@@ -37,8 +36,10 @@ try {
     console.log("Downloading audio");
     filePath = await downloadAudio(video.id);
 
-    //text to audio
-    const rosterList = await getTeamPlayers(fplName);
+    // text to audio
+    
+    const rosterList = await getTeamPlayers(fplName);  
+    
     const transcriptText = await textToAudio(filePath,rosterList);
 
     // Analyzing audio
