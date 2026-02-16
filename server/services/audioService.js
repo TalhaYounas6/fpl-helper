@@ -19,8 +19,9 @@ export const downloadAudio = async(videoId)=>{
       extractAudio: true,
       audioFormat: 'mp3',
       audioQuality: 9, 
+      limitRate: '2M',
       postprocessorArgs: [
-        'ffmpeg:-b:a 32k' 
+        'ffmpeg:-threads 1 -b:a 32k'
       ],
       output: path.join(temp_dir, '%(id)s.%(ext)s'), 
       noPlaylist: true,
