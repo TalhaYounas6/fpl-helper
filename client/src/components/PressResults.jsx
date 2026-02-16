@@ -26,8 +26,8 @@ const PlayerTicket = ({ player, index }) => {
 
 export const PressResults = ({ data, isloading,error,currentManager}) => {
   if (error) return <div className="font-mono text-center mt-20 text-red-500">// ERROR: FAILED TO GET THE DATA!</div>;
-  if (!data) return <div className="font-mono text-center opacity-50 mt-20">// WAITING FOR INPUT...</div>;
   if (isloading) return <div className="font-mono text-center opacity-50 mt-20">// GETTING THE DATA...</div>;
+  if (!data || (Array.isArray(data) && data.length === 0)) return <div className="font-mono text-center opacity-50 mt-20">// WAITING FOR INPUT...</div>;
   return (
     <div className="w-full flex flex-col gap-8">
       <motion.div 
