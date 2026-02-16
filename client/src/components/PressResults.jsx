@@ -38,7 +38,7 @@ export const PressResults = ({ data, isloading,error,currentManager}) => {
         <div className="flex justify-between items-center mb-4 border-b-4 border-black pb-2">
           <h2 className="font-black text-2xl uppercase">MANAGER'S BRIEF</h2>
           <span className="font-mono text-xs bg-black text-white px-2 py-1">
-            FRAUD SCORE : 
+            FRAUD SCORE: 
              {data.fraud_score}
           </span>
         </div>
