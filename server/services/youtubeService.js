@@ -168,7 +168,13 @@ const fetchTab = async (channelId, tab) => {
   try {
     const url = `https://www.youtube.com/channel/${channelId}/${tab}`;
     
-    const command = `yt-dlp --flat-playlist --print "%(id)s|||%(title)s|||%(upload_date)s" --playlist-end 30 "${url}"`;
+    // const command = `yt-dlp --flat-playlist --print "%(id)s|||%(title)s|||%(upload_date)s" --playlist-end 30 "${url}"`;
+    const command = `yt-dlp --flat-playlist \
+      --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" \
+      --referer "https://www.google.com/" \
+      --print "%(id)s|||%(title)s|||%(upload_date)s" \
+      --playlist-end 30 \
+      "${url}"`;
     
     const { stdout } = await execPromise(command);
     
@@ -179,7 +185,7 @@ const fetchTab = async (channelId, tab) => {
     }).filter(Boolean);
 
   } catch (error) {
-    
+    console.log("Failed to fetch youtube videos: ",error);
     return [];
   }
 };
