@@ -7,7 +7,7 @@ import "./cron/scheduler.js";
 const app = express();
 
 app.use(cors({
- origin: ['http://localhost:5173'],["https://premier-league-press-pass.vercel.app/"]
+ origin: ['http://localhost:5173',"https://premier-league-press-pass.vercel.app"],
   credentials: true
 }))
 
