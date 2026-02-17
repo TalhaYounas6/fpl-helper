@@ -168,11 +168,10 @@ const fetchTab = async (channelId, tab) => {
   try {
     const url = `https://www.youtube.com/channel/${channelId}/${tab}`;
     
-    // const command = `yt-dlp --flat-playlist --print "%(id)s|||%(title)s|||%(upload_date)s" --playlist-end 30 "${url}"`;
     const command = `yt-dlp --flat-playlist \
       --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" \
       --referer "https://www.google.com/" \
-      --print "%(id)s|||%(title)s|||%(upload_date)s" \
+      --print "%(id)s|||%(title)s|||%(upload_date)s|||%(live_status)s" \
       --playlist-end 30 \
       "${url}"`;
     
@@ -180,7 +179,20 @@ const fetchTab = async (channelId, tab) => {
     
     return stdout.trim().split('\n').map(line => {
       const parts = line.split('|||');
-      if (parts.length < 3) return null;
+      if (parts.length < 4) return null; 
+
+      const [id, title, date, liveStatus] = parts;
+
+      // FILTER LOGIC:
+      // 'is_upcoming' = scheduled for future
+      // 'is_live'     = currently airing (skip)
+      // 'post_live'   = Was live, now finished (keep)
+      // 'not_live'    = normal upload (keep)
+      
+      if (liveStatus === 'is_upcoming' || liveStatus === 'is_live') {
+         console.log(`Skipping ${liveStatus} video: ${title}`);
+         return null; 
+      }
       return { id: parts[0], title: parts[1], date: parts[2], type: tab };
     }).filter(Boolean);
 
