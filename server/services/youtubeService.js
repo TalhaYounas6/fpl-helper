@@ -231,7 +231,7 @@ export const searchLatestPressConference = async (channelId, teamName) => {
       
     const relevanceRegex = /\b(press conference|media briefing|preview|embargoed|pre-match|pre match|scott parker)\b/i;
 
-    const junkRegex = /\b(u21|women|post match|post-match|fa|carabao|cup|highlights|fantasy|goals|reaction|show|special|post)\b/i;
+    const junkRegex = /\b(u21|women|post match|post-match|fa|carabao|cup|highlights|fantasy|goals|reaction|show|special|post|reay)\b/i;
 
     const isRelevant = relevanceRegex.test(title);
     const isJunk = junkRegex.test(title);
