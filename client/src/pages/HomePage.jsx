@@ -52,7 +52,7 @@ const teams = {
   "Man City":          { name: "Manchester City",     manager: "Pep Guardiola" }, 
   "Man Utd":           { name: "Manchester United",   manager: "Michael Carrick" }, 
   "Newcastle":         { name: "Newcastle United",    manager: "Eddie Howe" },
-  "Nott'm Forest":     { name: "Nottingham Forest",   manager: "Sean Dyche (SACKED)" }, 
+  "Nott'm Forest":     { name: "Nottingham Forest",   manager: "Vitor Pereira" }, 
   // "Spurs":             { name: "Tottenham Hotspur",   manager: "Thomas Frank (SACKED)" }, 
   "West Ham":          { name: "West Ham United",     manager: "Nuno Espirito Santo" },
   // "Wolves":            { name: "Wolverhampton",       manager: "..." }
