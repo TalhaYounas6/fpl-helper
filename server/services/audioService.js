@@ -26,6 +26,8 @@ export const downloadAudio = async(videoId)=>{
       output: path.join(temp_dir, '%(id)s.%(ext)s'), 
       noPlaylist: true,
       ffmpegLocation: ffmpegPath,
+      jsRuntimes: 'node', 
+      client: 'ANDROID',
     })
         
     console.log("Audio download complete.For: ",outputPath);
