@@ -27,7 +27,7 @@ export const downloadAudio = async(videoId)=>{
       noPlaylist: true,
       ffmpegLocation: ffmpegPath,
       jsRuntimes: 'node', 
-      client: 'ANDROID',
+      extractorArgs: 'youtube:player_client=android',
     })
         
     console.log("Audio download complete.For: ",outputPath);
