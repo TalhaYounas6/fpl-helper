@@ -50,3 +50,82 @@ The application follows a sequential pipeline:
 4. **AI Analysis**: Text from the press conference is sent to Gemini API to extract player availability information.
 
 ---
+## Local Setup
+
+The project is divided into two main directories: `/client` (Frontend) and `/server` (Backend). You will need to configure and run both for a full local environment.
+
+### Prerequisites
+
+* Node.js (v18 or higher)
+* FFmpeg installed on your system
+* A Redis instance (Local or Upstash)
+* API keys for Google Gemini and AssemblyAI
+
+### Installation
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/TalhaYounas6/fpl-helper
+cd fpl-helper
+
+```
+
+
+2. **Setup the Server:**
+```bash
+cd server
+npm install
+
+```
+
+
+3. **Setup the Client:**
+
+```bash
+   cd ../client
+   npm install
+
+```
+
+### Environment Configuration
+
+You must create a `.env` file in both the client and server directories with the following variables:
+
+**Server Environment Variables (`/server/.env`):**
+
+```env
+PORT=3000
+GEMINI_API_KEY=your_gemini_key
+REDIS_URL=your_redis_connection_url
+ASSEMBLY_AI_API_KEY=your_assembly_ai_key
+
+```
+
+**Client Environment Variables (`/client/.env`):**
+
+```env
+VITE_BASE_URL=http://localhost:3000
+
+```
+
+### Running Locally
+
+To start the application, you will need two terminal windows:
+
+**Terminal 1 (Backend):**
+
+```bash
+cd server
+npm start
+
+```
+
+**Terminal 2 (Frontend):**
+
+```bash
+cd client
+npm run dev
+
+```
+
+
