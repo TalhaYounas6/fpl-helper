@@ -15,7 +15,7 @@ The system updates every 4 hours to ensure the dashboard reflects the most recen
 ## Core Features
 
 * **Automated YouTube Extraction**: Utilizes yt-dlp to monitor club channels and pull the latest pre-match briefings.
-* **AI-Driven Analysis**: Uses Google Gemini to parse audio transcripts and categorize player status into Fit, Doubtful, or Out.
+* **AI-Driven Analysis**: Uses Assembly AI and Google Gemini to parse audio transcripts and categorize player status into Fit, Doubtful, or Out.
 * **Direct Quote Extraction**: Provides the exact text spoken by the manager to give users full context beyond a simple status label.
 
 
