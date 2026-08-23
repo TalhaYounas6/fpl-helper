@@ -9,14 +9,19 @@ export const CHANNELS = {
   // "Crystal Palace":    { name: "Crystal Palace",      channelId: "..." },
   "Everton":           { name: "Everton",             channelId: "UCtK4QAczAN2mt2ow_jlGinQ" },
   "Fulham":            { name: "Fulham FC",           channelId: "UC2VLfz92cTT8jHIFOecC-LA" },
-  "Burnley":           { name: "Burnley",        channelId: "UChvUXuSDeEFSQZS8GcPMtkg" },
+  // "Burnley":           { name: "Burnley",        channelId: "UChvUXuSDeEFSQZS8GcPMtkg" },
   "Sunderland":         { name: "Sunderland",      channelId: "UCrw-7k6yJc0EMJdf-0BAkoQ" },
   "Liverpool":         { name: "Liverpool FC",        channelId: "UC9LQwHZoucFT94I2h6JOcjw" },
   "Man City":          { name: "Manchester City",     channelId: "UCkzCjdRMrW2vXLx8mvPVLdQ" }, 
   "Man Utd":           { name: "Manchester United",   channelId: "UC6yW44UGJJBvYTlfC7CRg2Q" }, 
   "Newcastle":         { name: "Newcastle United",    channelId: "UCywGl_BPp9QhD0uAcP2HsJw" },
-  "Nott'm Forest":     { name: "Nottingham Forest",   channelId: "UCyAxjuAr8f_BFDGCO3Htbxw" }, 
+  "Nott'm Forest":     { name: "Nottingham Forest",   channelId: "UCyAxjuAr8f_BFDGCO3Htbxw" },
+  "Coventry City":    {name: "Coventry City", channelId:"UCch_NWdo3JWKngAyO9XlycA"},
+  // "Ipswich Town":     {name:"Ipswich Town" , channelId:""},
+  // "Hull City":        {name:"Hull City", channelId:""},
+
+
   // "Spurs":             { name: "Tottenham Hotspur",   channelId: "UCB9aWK0xfz2P-Ny2nsXGHrA" }, 
-  "West Ham":          { name: "West Ham United",     channelId: "UCCNOsmurvpEit9paBOzWtUg" },
+  // "West Ham":          { name: "West Ham United",     channelId: "UCCNOsmurvpEit9paBOzWtUg" },
   // "Wolves":            { name: "Wolverhampton",       channelId: "..." }
 }
