@@ -5,7 +5,7 @@ export const CHANNELS = {
   "Bournemouth":       { name: "AFC Bournemouth",     channelId: "UCeOCuVSSweaEj6oVtJZEKQw" },
   // "Brentford":         { name: "Brentford FC",        channelId: "..." },
   "Brighton":          { name: "Brighton & Hove Albion",channelId: "UCf-cpC9WAdOsas19JHipukA" },
-  "Chelsea":           { name: "Chelsea FC",          channelId: "UC-vYD3MIjYW-EEfBGwlsd_A" },
+  "Chelsea":           { name: "Chelsea FC",          channelId: "UCU2PacFf99vhb3hNiYDmxww" },
   // "Crystal Palace":    { name: "Crystal Palace",      channelId: "..." },
   "Everton":           { name: "Everton",             channelId: "UCtK4QAczAN2mt2ow_jlGinQ" },
   "Fulham":            { name: "Fulham FC",           channelId: "UC2VLfz92cTT8jHIFOecC-LA" },
