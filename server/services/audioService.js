@@ -27,7 +27,6 @@ export const downloadAudio = async(videoId)=>{
       noPlaylist: true,
       ffmpegLocation: ffmpegPath,
       jsRuntimes: 'node', 
-      extractorArgs: 'youtube:player_client=web_safari',
       cookies: path.resolve('./cookies.txt')
     })
         
