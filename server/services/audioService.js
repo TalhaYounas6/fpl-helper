@@ -30,7 +30,7 @@ export const downloadAudio = async(videoId)=>{
       output: path.join(temp_dir, '%(id)s.%(ext)s'), 
       noPlaylist: true,
       ffmpegLocation: ffmpegPath, 
-      cookies: path.join(__dirname,'./cookies.txt')
+      cookies: path.join(__dirname,'../cookies.txt')
     })
         
     console.log("Audio download complete.For: ",outputPath);
