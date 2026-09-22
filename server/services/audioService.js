@@ -2,7 +2,11 @@ import ytDlp from 'yt-dlp-exec';
 import fs, { mkdirSync } from 'fs';
 import path, { dirname } from 'path';
 import ffmpegPath from 'ffmpeg-static';
+import { fileURLToPath } from 'url';
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const temp_dir = path.resolve('temp');
 
 if(!fs.existsSync(temp_dir)){
@@ -26,7 +30,7 @@ export const downloadAudio = async(videoId)=>{
       output: path.join(temp_dir, '%(id)s.%(ext)s'), 
       noPlaylist: true,
       ffmpegLocation: ffmpegPath, 
-      cookies: path.join(dirname,'./cookies.txt')
+      cookies: path.join(__dirname,'./cookies.txt')
     })
         
     console.log("Audio download complete.For: ",outputPath);
