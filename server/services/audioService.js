@@ -31,7 +31,8 @@ export const downloadAudio = async(videoId)=>{
       noPlaylist: true,
       ffmpegLocation: ffmpegPath,
       jsRuntimes: 'node', 
-      cookies: path.join(__dirname,'../cookies.txt')
+      cookies: path.join(__dirname,'../cookies.txt'),
+      extractorArgs: 'youtube:player_client=default,web_embedded'
     })
         
     console.log("Audio download complete.For: ",outputPath);
