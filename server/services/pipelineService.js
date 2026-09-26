@@ -1,5 +1,5 @@
-import { deleteAudioFile, downloadAudio } from "../services/audioService.js";
-import { analyzeAudio} from "../services/geminiService.js";
+import { deleteAudioFile, downloadAudio as downloadAudioORGetTranscription } from "../services/audioService.js";
+import { analyzeAudio as analyzeAudioandText} from "../services/geminiService.js";
 import { saveTeamUpdate,getRedisTeamData } from "../services/redisService.js";
 import {searchLatestPressConference } from "../services/youtubeService.js";
 import { textToAudio } from "../services/transcriptionService.js";
@@ -11,7 +11,7 @@ const {name : displayName, channelId} = config;
 
 console.log(`Working on ${displayName}`);
 
-let filePath;
+let filePathOrText;
 
 try {
     // Searching youtube
@@ -33,18 +33,18 @@ try {
     console.log(`Video found: ${video.title}`);
 
     // Download audio
-    console.log("Downloading audio");
-    filePath = await downloadAudio(video.id);
+    console.log("Downloading audio/Fetching transcription");
+    filePathOrText = await downloadAudioORGetTranscription(video.id);
 
     // text to audio
     
     const rosterList = await getTeamPlayers(fplName);  
     
-    const transcriptText = await textToAudio(filePath,rosterList);
+    // const transcriptText = await textToAudio(filePath,rosterList);
 
     // Analyzing audio
     console.log("Analysis...");
-    const analysis = await analyzeAudio(transcriptText,fplName,rosterList);
+    const analysis = await analyzeAudioandText(filePathOrText,fplName,rosterList);
 
     // Save to redis
     const redisData = {
@@ -61,8 +61,8 @@ try {
     console.log(`Error processing ${displayName}: `,error.message);
 }
 finally{
-    if(filePath){
-        await deleteAudioFile(filePath);
+    if(filePathOrText){
+        await deleteAudioFile(filePathOrText);
     }
 }
 } 

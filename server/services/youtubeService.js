@@ -164,6 +164,17 @@ import util from 'util';
 
 const execPromise = util.promisify(exec);
 
+const fetchExactTimestamp = async (videoId) => {
+    try {
+        // Fetches just the UNIX timestamp (e.g., 1726589320)
+        const command = `yt-dlp --print "%(timestamp)s" "https://www.youtube.com/watch?v=${videoId}"`;
+        const { stdout } = await execPromise(command);
+        return parseInt(stdout.trim(), 10) || 0;
+    } catch (error) {
+        return 0;
+    }
+};
+
 const fetchTab = async (channelId, tab) => {
   try {
     const url = `https://www.youtube.com/channel/${channelId}/${tab}`;
@@ -231,18 +242,34 @@ export const searchLatestPressConference = async (channelId, teamName) => {
       
     const relevanceRegex = /\b(press conference|media briefing|preview|embargoed|pre-match|pre match|scott parker)\b/i;
 
-    const junkRegex = /\b(u21|women|post match|post-match|fa|carabao|cup|highlights|fantasy|goals|reaction|show|special|post|reay)\b/i;
+    const junkRegex = /\b(u21|women|post match|post-match|fa|carabao|cup|highlights|fantasy|goals|reaction|show|special|post|reay|Slegers|wsl|community shield)\b/i;
 
     const isRelevant = relevanceRegex.test(title);
     const isJunk = junkRegex.test(title);
 
       return isRelevant && !isJunk;
     });
-    
-    validVideos.sort((a, b) => b.date.localeCompare(a.date));
 
-    if (validVideos.length > 0) {
-      const bestMatch = validVideos[0];
+    const videosWithTimestamps = await Promise.all(
+        validVideos.map(async (vid) => {
+            try {
+                // Fetch the exact UNIX timestamp using yt-dlp
+                const command = `yt-dlp --print "%(timestamp)s" "https://www.youtube.com/watch?v=${vid.id}"`;
+                const { stdout } = await execPromise(command);
+                const timestamp = parseInt(stdout.trim(), 10) || 0;
+                
+                return { ...vid, timestamp }; // Add the real timestamp to the object
+            } catch (err) {
+                return { ...vid, timestamp: 0 };
+            }
+        })
+    );
+    
+    videosWithTimestamps.sort((a, b) => b.timestamp - a.timestamp);
+ 
+
+    if (videosWithTimestamps.length > 0) {
+      const bestMatch = videosWithTimestamps[0];
       console.log(`Found: "${bestMatch.title}" (${bestMatch.date})`);
       return {
         id: bestMatch.id,
